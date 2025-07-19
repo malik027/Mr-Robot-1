@@ -27,3 +27,6 @@ Since the **Mr.Robot** VM is being hosted on my PC using a **Bridged Adapter** o
 sudo netdiscover
 ```
 ![screenshot](images/1.jpg)
+The IP of 192.168.0.103 will be our target. Once we got that, let’s go ahead and run an nmap scan to check for any open ports and probe for running services.
+
+![screenshot](images/2.jpg)
