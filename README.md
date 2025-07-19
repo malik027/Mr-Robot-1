@@ -90,9 +90,7 @@ When we get to that page, we can see Mr. Robot calling us a script cat... okayyy
 ![screenshot](images/9.jpg)
 
 Ok, we got a username and a password. I wonder where we can use this. Hmm… let’s try and use the admin login page /wp-login/ that was found by nikto.
-
 Once we are logged in as Elliot, we also see that we are the WordPress Site admin. Let’s scour around and see what we can find!
-
 From the looks of it, I see we have access to Updates and Plugins. We can go ahead and check Plugin versions.
 
 Upon checking Plugins, we get the following:
