@@ -81,7 +81,7 @@ Since we got 2 locations from **/robots.txt**, let’s navigate to **http://192.
 
 Interesting… looks like this is a C Source Code file. Maybe we can use it for brute force… but let's save it for later!
 
-Alright, we now know that the WordPress site is Version 4.3.6, we can use that to our advantage later! Next best thing to try is the /license.txt location.
+Alright, we now know that the WordPress site is Version 4.3.6, we can use that to our advantage later! Next best thing to try is the **/license.txt** location.
 
 ![screenshot](images/8.png)
 
@@ -132,7 +132,7 @@ Awesome! We got the shell up and running on the host! Let’s snoop around to se
 
 ![screenshot](images/14.png)
 
-Okay, I found the second key, but I don't have permission to view the text, and it looks like we have an MD5 hash of the bot's username. Let's use Hashcat and see if it can crack the MD5 hash for us.
+Okay, I found the second key, but I don't have permission to view the text, and it looks like we have an MD5 hash of the robot username. Let's use **Hashcat** and see if it can crack the MD5 hash for us.
 Copy the hash key and create an .md5 file to use as the hash. You can follow the instructions I used, or use any other command you like.
 
 ```
@@ -145,10 +145,9 @@ hashcat -a 0 -m 0 password.md5 /usr/share/wordlists/rockyou.txt -o crack.txt
 ![screenshot](images/15.png)
 
 Oh man, that's a terrible password! Who cares, it's easy to crack!
-
 Since we have the password and the session on the host, let's see if we can log in as the robot user.
 
-Okay, we got shell! Now we want to be able to login to robot. So what we need to do is establish a TTY Shell. We can do so by typing the following line:
+Okay, we got shell! Now we want to be able to login to robot. So what we need to do is establish a **[TTY Shell](https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con)**. We can do so by typing the following line:
 
 ```
 python -c 'import pty;pty.spawn("/bin/sh")'
@@ -165,7 +164,7 @@ Once in, we can login as robot and get the second flag!
 ```
 
 Okay, go do a victory lap around the house! You deserve it! Though… we’re still not done. Still got 1 more key to find!
-Since we exploited the host, and got in - our next step is to carry out Post-Explotation and further Enumeration on the internal side.
+Since we exploited the host, and got in - our next step is to carry out **[Post-Explotation](http://www.pentest-standard.org/index.php/Post_Exploitation)** and further Enumeration on the internal side.
 
 next thing i usually do is look for SUID binaries and see what we can exploit to get to the top.
 
@@ -179,6 +178,8 @@ Awesome! The host in running an old version of nmap, which supports an option ca
 
 ```
 nmap --interactive
+!sh
+cd /root
 ```
 **key 3 :**
 
