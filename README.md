@@ -56,9 +56,13 @@ A few interesting things come up in the scan.
 - /wp-admin/wp-login.php: Wordpress login found.
 6. OSVDB-3092: /license.txt: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
 
-Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.1.9.
+Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.0.103.
 ![screenshot](images/4.jpg)
 
 es - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
 We can see that we are able to run 6 commands in the interface, each does its own little thing. So go ahead and play around with them - I did, and thoroughly enjoyed it - but, let’s get back to the CTF!
-We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://192.168.1.9/robots.txt.
+We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://192.168.0.103/robots.txt.
+![screenshot](images/5.jpg)
+
+Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of course… I want the key! So let’s navigate to http://192.168.1.9/key-1-of-3.txt.
+![screenshot](images/7.png)
