@@ -69,6 +69,7 @@ Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of c
 
 ![screenshot](images/7.jpg)
 
+**Key 1 :**
 ```073403c8a58a1f80d943455fb30724b9
 073403c8a58a1f80d943455fb30724b9
 ```
@@ -157,7 +158,7 @@ Once in, we can login as robot and get the second flag!
 
 ![screenshot](images/16.png)
 
-***Key 2 :***
+**Key 2 :**
 ```key 2 :
 822c73956184f694993bede3eb39f959
 ```
