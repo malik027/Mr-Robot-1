@@ -41,6 +41,7 @@ After running a quick command on nmap, I see ports 22, 80, and 443 are open. Oka
 nikto -h 192.168.0.103
 ```
 ![schreenshot](images/3.png)
+
 A few interesting things come up in the scan.
 
 * We see that the server is leaking inodes via ETags in the header of /robots.txt. This relates to the CVE-2003-1418 vulnerability. These Entity Tags are an HTTP header which are used for Web cache validation and conditional requests from browsers for resources.
@@ -57,6 +58,7 @@ A few interesting things come up in the scan.
 
 Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.1.9.
 ![screenshot](images/4.jpg)
+
 es - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
 We can see that we are able to run 6 commands in the interface, each does its own little thing. So go ahead and play around with them - I did, and thoroughly enjoyed it - but, let’s get back to the CTF!
 We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://192.168.1.9/robots.txt.
