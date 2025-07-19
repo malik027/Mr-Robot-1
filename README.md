@@ -41,3 +41,22 @@ After running a quick command on nmap, I see ports 22, 80, and 443 are open. Oka
 nikto -h 192.168.0.103
 ```
 ![schreenshot](images/3.png)
+A few interesting things come up in the scan.
+
+* We see that the server is leaking inodes via ETags in the header of /robots.txt. This relates to the CVE-2003-1418 vulnerability. These Entity Tags are an HTTP header which are used for Web cache validation and conditional requests from browsers for resources.
+* Apache mod_negotiation is enabled with MultiViews, which will allow us to use a brute force attack in order to discover existing files on a server which uses mod_negotiation.
+* The following alternatives for ‘index’ were found: index.html, and index.php. These can be used to provide us with more info on the website.
+* OSVDB-3092: /admin/: This might be interesting… if we have a login. Good to keep that in the back of our mind.
+- /admin/index.html: Admin login page/section found - also relates to the above scan.
+* /readme.html: This WordPress file reveals the installed version.
+- Basically tells us that this is a WordPress Site! So we know we can look for WordPress Vulnerabilities.
+- /wp-links-opml.php: This WordPress script reveals the installed version.
+- /wp-login/: Admin login page/section found.
+- /wp-admin/wp-login.php: Wordpress login found.
+* OSVDB-3092: /license.txt: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
+
+Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.1.9.
+![screenshot](images/4.jpg)
+es - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
+We can see that we are able to run 6 commands in the interface, each does its own little thing. So go ahead and play around with them - I did, and thoroughly enjoyed it - but, let’s get back to the CTF!
+We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://192.168.1.9/robots.txt.
