@@ -87,6 +87,8 @@ Alright, we now know that the WordPress site is Version 4.3.6, we can use that t
 
 When we get to that page, we can see Mr. Robot calling us a script cat... okayyy. Looks like there's more to that page, scroll down and see what we can find! Nani! We got the password for... uh... something. It looks like the password is encrypted with base64. We can even decode it in our terminal!
 
+```echo ZWxsaW90OkVSMjgtMDY1Mgo= | base64 -d
+```
 ![screenshot](images/9.jpg)
 
 Ok, we got a username and a password. I wonder where we can use this. Hmm… let’s try and use the admin login page /wp-login/ that was found by nikto.
