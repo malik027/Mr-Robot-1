@@ -124,7 +124,7 @@ After the upload is successful, run netcat and navigate the browser to the URL o
 netcat -lnvp 444
 ```
 
-![screenshot](images/13.png)
+![screenshot](images/13.jpg)
 
 Awesome! We got the shell up and running on the host! Let’s snoop around to see what we can find!
 
