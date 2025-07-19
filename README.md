@@ -24,5 +24,3 @@ If you want to learn more about the proper procedures and steps then I suggest y
 Since the **Mr.Robot** VM is being hosted on my PC using a **Bridged Adapter** over VirtualBox, we will go ahead and scan our network to see if we can’t get the IP. To do so, type in **netdiscover** in your terminal.
 
 `sudo netdiscover`
-
-![screenshot](images/1.jpg)
