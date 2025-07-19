@@ -56,16 +56,16 @@ A few interesting things come up in the scan.
 - /wp-admin/wp-login.php: Wordpress login found.
 6. OSVDB-3092: /license.txt: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
 
-Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.0.103.
+Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to .0.103.
 ![screenshot](images/4.jpg)
 
 es - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
 We can see that we are able to run 6 commands in the interface, each does its own little thing. So go ahead and play around with them - I did, and thoroughly enjoyed it - but, let’s get back to the CTF!
-We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://192.168.0.103/robots.txt.
+We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://.0.103/robots.txt.
 
 ![screenshot](images/5.jpg)
 
-Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of course… I want the key! So let’s navigate to http://192.168.0.103/key-1-of-3.txt.
+Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of course… I want the key! So let’s navigate to http://.0.103/key-1-of-3.txt.
 
 ![screenshot](images/7.jpg)
 
@@ -74,7 +74,7 @@ Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of c
 ```
 Yay! We got the fist key! Let’s keep moving on… It ain’t over yet, ain’t over yet! Move, keep walkin’ until the mornin’ comes! (Sorry, got carried away again.)
 
-Since we got 2 locations from /robots.txt, let’s navigate to http://192.168.1.9/fsocity.dic and see what we have left.
+Since we got 2 locations from /robots.txt, let’s navigate to http://.0.103/fsocity.dic and see what we have left.
 
 ![screenshot](images/6.png)
 
@@ -120,7 +120,7 @@ After downloading, don't forget to configure the shell a little, then upload it 
 
 After the upload is successful, run netcat and navigate the browser to the URL of the file that has been successfully uploaded.
 
-```netcat -lnvp 444
+```netcat -lnvp 4444
 netcat -lnvp 444
 ```
 
@@ -188,3 +188,5 @@ nmap --interactive
 And there we have it! We captured all three keys, and rooted the system!
 If this was a real engagement, we would be able to do a lot more damage, now that we have root privileges. Well, I hoped you guys enjoyed this post as much as I enjoyed pwning Mr. Robot!
 This box was really well put together and honestly challenged me - at the same time I learned a lot about the hacking process and some new exploitations, along with many valuable lessons.
+
+![gif](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2tmcGtqdW5xbmk5czVrbmptaGx3cWxyM3dpMjM4ZzU3NWxkYjE1NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mQG644PY8O7rG/giphy.gif)
