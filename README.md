@@ -21,7 +21,7 @@ The VM isn’t too difficult. There isn’t any advanced exploitation or reverse
 So the first step in any Pentest - whether it’s Network or Web - (besides OSINT!) - is **Intelligence Gathering**. That includes **Footprinting** and **Fingerprinting** hosts, servers, etc.
 If you want to learn more about the proper procedures and steps then I suggest you read the [PTES Technical Guidelines](http://www.pentest-standard.org/index.php/Main_Page).
 
-Since the **Mr.Robot** VM is being hosted on my PC, using a **Bridged Adapter** over VirtualBox, we will go ahead and scan our network to see if we can’t get the IP. To do so, type in **netdiscover** in your terminal.
+Since the **Mr.Robot** VM is being hosted on my PC using a **Bridged Adapter** over VirtualBox, we will go ahead and scan our network to see if we can’t get the IP. To do so, type in **sudo netdiscover** in your terminal.
 
 ```
 sudo netdiscover
@@ -44,28 +44,28 @@ nikto -h 192.168.0.103
 
 A few interesting things come up in the scan.
 
-1. We see that the server is leaking inodes via ETags in the header of /robots.txt. This relates to the CVE-2003-1418 vulnerability. These Entity Tags are an HTTP header which are used for Web cache validation and conditional requests from browsers for resources.
-2. Apache mod_negotiation is enabled with MultiViews, which will allow us to use a brute force attack in order to discover existing files on a server which uses mod_negotiation.
-3. The following alternatives for ‘index’ were found: index.html, and index.php. These can be used to provide us with more info on the website.
+1. We see that the server is **leaking inodes via ETags** in the header of **/robots.txt**. This relates to the [CVE-2003-1418](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-1418) vulnerability. These [Entity Tags](whatis.techtarget.com/definition/entity-tag-Etag) are an HTTP header which are used for Web cache validation and conditional requests from browsers for resources.
+2. Apache mod_negotiation is enabled with MultiViews, which will allow us to use a brute force attack in order to discover existing files on a server which uses [mod_negotiation](https://httpd.apache.org/docs/2.4/mod/mod_negotiation.html).
+3. The following alternatives for ‘index’ were found: **index.html**, and **index.php**. These can be used to provide us with more info on the website.
 4. OSVDB-3092: /admin/: This might be interesting… if we have a login. Good to keep that in the back of our mind.
-- /admin/index.html: Admin login page/section found - also relates to the above scan.
-5. /readme.html: This WordPress file reveals the installed version.
-- Basically tells us that this is a WordPress Site! So we know we can look for WordPress Vulnerabilities.
-- /wp-links-opml.php: This WordPress script reveals the installed version.
-- /wp-login/: Admin login page/section found.
-- /wp-admin/wp-login.php: Wordpress login found.
-6. OSVDB-3092: /license.txt: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
+  - **/admin/index.html**: Admin login page/section found - also relates to the above scan.
+5. **/readme.html**: This WordPress file reveals the installed version.
+  - Basically tells us that this is a WordPress Site! So we know we can look for WordPress Vulnerabilities.
+  - **/wp-links-opml.php**: This WordPress script reveals the installed version.
+  - **/wp-login/**: Admin login page/section found.
+  - **/wp-admin/wp-login.php**: Wordpress login found.
+6. OSVDB-3092: **/license.txt**: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
 
-Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to .0.103.
+Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.0.103.
 ![screenshot](images/4.jpg)
 
-es - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
+Yes - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
 We can see that we are able to run 6 commands in the interface, each does its own little thing. So go ahead and play around with them - I did, and thoroughly enjoyed it - but, let’s get back to the CTF!
-We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://.0.103/robots.txt.
+We already know that there are leaking indoes via ETags at **/robots.txt**, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to **http://192.168.0.103/robots.txt**.
 
 ![screenshot](images/5.jpg)
 
-Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of course… I want the key! So let’s navigate to http://.0.103/key-1-of-3.txt.
+Nice! We got 2 locations we can navigate to **fsocity.dic** and **key-1-of-3.txt**. Of course… I want the key! So let’s navigate to **http://192.168.0.103/key-1-of-3.txt**.
 
 ![screenshot](images/7.jpg)
 
@@ -75,7 +75,7 @@ Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of c
 ```
 Yay! We got the fist key! Let’s keep moving on… It ain’t over yet, ain’t over yet! Move, keep walkin’ until the mornin’ comes! (Sorry, got carried away again.)
 
-Since we got 2 locations from /robots.txt, let’s navigate to http://.0.103/fsocity.dic and see what we have left.
+Since we got 2 locations from **/robots.txt**, let’s navigate to **http://192.168.0.103/fsocity.dic** and see what we have left.
 
 ![screenshot](images/6.png)
 
@@ -92,7 +92,7 @@ echo ZWxsaW90OkVSMjgtMDY1Mgo= | base64 -d
 ```
 ![screenshot](images/9.jpg)
 
-Ok, we got a username and a password. I wonder where we can use this. Hmm… let’s try and use the admin login page /wp-login/ that was found by nikto.
+Ok, we got a username and a password. I wonder where we can use this. Hmm… let’s try and use the admin login page **/wp-login.php/** that was found by nikto.
 Once we are logged in as Elliot, we also see that we are the WordPress Site admin. Let’s scour around and see what we can find!
 From the looks of it, I see we have access to Updates and Plugins. We can go ahead and check Plugin versions.
 
