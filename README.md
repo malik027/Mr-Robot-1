@@ -78,8 +78,7 @@ Since we got 2 locations from /robots.txt, let’s navigate to http://192.168.1.
 
 ![screenshot](images/6.png)
 
-Interesting… it appears to be a C Source Code file. Let’s open it and see what it contains!
-Seems like a word list of some kind… It’s possible that we can use this for brute forcing… but let’s save that for later!
+Interesting… looks like this is a C Source Code file. Maybe we can use it for brute force… but let's save it for later!
 
 Alright, we now know that the WordPress site is Version 4.3.6, we can use that to our advantage later! Next best thing to try is the /license.txt location.
 
