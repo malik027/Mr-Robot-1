@@ -44,17 +44,17 @@ nikto -h 192.168.0.103
 
 A few interesting things come up in the scan.
 
-* We see that the server is leaking inodes via ETags in the header of /robots.txt. This relates to the CVE-2003-1418 vulnerability. These Entity Tags are an HTTP header which are used for Web cache validation and conditional requests from browsers for resources.
-* Apache mod_negotiation is enabled with MultiViews, which will allow us to use a brute force attack in order to discover existing files on a server which uses mod_negotiation.
-* The following alternatives for ‘index’ were found: index.html, and index.php. These can be used to provide us with more info on the website.
-* OSVDB-3092: /admin/: This might be interesting… if we have a login. Good to keep that in the back of our mind.
+1. We see that the server is leaking inodes via ETags in the header of /robots.txt. This relates to the CVE-2003-1418 vulnerability. These Entity Tags are an HTTP header which are used for Web cache validation and conditional requests from browsers for resources.
+2. Apache mod_negotiation is enabled with MultiViews, which will allow us to use a brute force attack in order to discover existing files on a server which uses mod_negotiation.
+3. The following alternatives for ‘index’ were found: index.html, and index.php. These can be used to provide us with more info on the website.
+4. OSVDB-3092: /admin/: This might be interesting… if we have a login. Good to keep that in the back of our mind.
 - /admin/index.html: Admin login page/section found - also relates to the above scan.
-* /readme.html: This WordPress file reveals the installed version.
+5. /readme.html: This WordPress file reveals the installed version.
 - Basically tells us that this is a WordPress Site! So we know we can look for WordPress Vulnerabilities.
 - /wp-links-opml.php: This WordPress script reveals the installed version.
 - /wp-login/: Admin login page/section found.
 - /wp-admin/wp-login.php: Wordpress login found.
-* OSVDB-3092: /license.txt: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
+6. OSVDB-3092: /license.txt: License file found may identify site software. Which can help us get version information of plugins and services to look for exploits.
 
 Alright, we got our initial footprint, let’s go ahead and access the website in our browser by navigating to 192.168.1.9.
 ![screenshot](images/4.jpg)
