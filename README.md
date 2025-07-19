@@ -84,7 +84,36 @@ Alright, we now know that the WordPress site is Version 4.3.6, we can use that t
 
 ![screenshot](images/8.png)
 
-When we arrive at the page, we can see that Mr. Robot is calling us a script kitty… okayyy. It seems there is more on the page, let’s scroll down and see what we can find!
-Nice! We got the password to… um… something. It seems that the password is base64 encoded. We can actually decode it in our terminal!
+When we get to that page, we can see Mr. Robot calling us a script cat... okayyy. Looks like there's more to that page, scroll down and see what we can find! Nani! We got the password for... uh... something. It looks like the password is encrypted with base64. We can even decode it in our terminal!
 
 ![screenshot](images/9.jpg)
+
+Ok, we got a username and a password. I wonder where we can use this. Hmm… let’s try and use the admin login page /wp-login/ that was found by nikto.
+
+Once we are logged in as Elliot, we also see that we are the WordPress Site admin. Let’s scour around and see what we can find!
+
+From the looks of it, I see we have access to Updates and Plugins. We can go ahead and check Plugin versions.
+
+Upon checking Plugins, we get the following:
+
+- Akismet - Version 3.1.5
+- All in One SEO Pack - Version 2.2.5.1
+- All-in-One WP Migration - Version 2.0.4
+- Contact Form 7 - Version 4.1
+- Google Analytics by Yoast - Version 5.3.2
+- Google XML Sitemaps - Version 4.0.8
+- Hello Dolly - Version 1.6
+- Jetpack by WordPress.com - Version 3.3.2
+- Simple Tags - Version 2.4
+- WP-Mail-SMTP - Version 0.9.5
+- WPtouch Mobile Plugin - Version 3.7.3
+
+With this, I will go ahead by downloading and uploading **[shell-reverse-php](https://pentestmonkey.net/tools/web-shells/php-reverse-shell)**, which can allow us to get a shell or reverse connection from the server we are targeting.
+
+![screenshot](images/10.png)
+
+After downloading, don't forget to configure the shell a little, then upload it to the Media section.
+
+![screenshot](images/11.png)
+
+![screenshot](images/12.png)
