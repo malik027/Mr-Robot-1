@@ -157,9 +157,11 @@ Once in, we can login as robot and get the second flag!
 
 ![screenshot](images/16.png)
 
+### Key 2 :
 ```key 2 :
 822c73956184f694993bede3eb39f959
 ```
+
 Okay, go do a victory lap around the house! You deserve it! Though… we’re still not done. Still got 1 more key to find!
 Since we exploited the host, and got in - our next step is to carry out Post-Explotation and further Enumeration on the internal side.
 
@@ -176,6 +178,8 @@ Awesome! The host in running an old version of nmap, which supports an option ca
 ```nmap --interactive
 nmap --interactive
 ```
+### key 3 :
+
 ```key 3 :
 04787ddef27c3dee1ee161b21670b4e4
 ```
