@@ -3,7 +3,7 @@
 ## Overview :
 - Flag Count: 3
 - OVA link: https://www.vulnhub.com/entry/mr-robot-1,151/
-- Tools used: netdiscover, nmap, nikto, hashcat
+- Tools used: netdiscover, nmap, nikto, hashcat, netcat
 
 Hello, and welcome to my first installment of the VulnHub VM Write-ups!
 
