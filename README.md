@@ -157,7 +157,7 @@ Once in, we can login as robot and get the second flag!
 
 ![screenshot](images/16.png)
 
-### Key 2 :
+***Key 2 :***
 ```key 2 :
 822c73956184f694993bede3eb39f959
 ```
@@ -178,7 +178,7 @@ Awesome! The host in running an old version of nmap, which supports an option ca
 ```nmap --interactive
 nmap --interactive
 ```
-### key 3 :
+**key 3 :**
 
 ```key 3 :
 04787ddef27c3dee1ee161b21670b4e4
