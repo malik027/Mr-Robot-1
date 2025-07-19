@@ -37,4 +37,7 @@ nmap -sS -T4 192.168.0.103
 
 After running a quick command on nmap, I see ports 22, 80, and 443 are open. Okay, since we know this is a web server… let’s run nikto to scan for any “possible” vulnerabilities or misconfigurations.
 
+```nikto -h 192.168.0.103
+nikto -h 192.168.0.103
+```
 ![schreenshot](images/3.png)
