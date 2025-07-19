@@ -62,7 +62,30 @@ Alright, we got our initial footprint, let’s go ahead and access the website i
 es - I came here for a reason, to hack you! Anyways, that website is actually pretty freakin cool!
 We can see that we are able to run 6 commands in the interface, each does its own little thing. So go ahead and play around with them - I did, and thoroughly enjoyed it - but, let’s get back to the CTF!
 We already know that there are leaking indoes via ETags at /robots.txt, which is basically a text file that is used to prevent crawlers from indexing portions of the website. Let’s go ahead and navigate to http://192.168.0.103/robots.txt.
+
 ![screenshot](images/5.jpg)
 
-Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of course… I want the key! So let’s navigate to http://192.168.1.9/key-1-of-3.txt.
-![screenshot](images/7.png)
+Nice! We got 2 locations we can navigate to fsocity.dic and key-1-of-3.txt. Of course… I want the key! So let’s navigate to http://192.168.0.103/key-1-of-3.txt.
+
+![screenshot](images/7.jpg)
+
+```073403c8a58a1f80d943455fb30724b9
+073403c8a58a1f80d943455fb30724b9
+```
+Yay! We got the fist key! Let’s keep moving on… It ain’t over yet, ain’t over yet! Move, keep walkin’ until the mornin’ comes! (Sorry, got carried away again.)
+
+Since we got 2 locations from /robots.txt, let’s navigate to http://192.168.1.9/fsocity.dic and see what we have left.
+
+![screenshot](images/6.png)
+
+Interesting… it appears to be a C Source Code file. Let’s open it and see what it contains!
+Seems like a word list of some kind… It’s possible that we can use this for brute forcing… but let’s save that for later!
+
+Alright, we now know that the WordPress site is Version 4.3.6, we can use that to our advantage later! Next best thing to try is the /license.txt location.
+
+![screenshot](images/8.png)
+
+When we arrive at the page, we can see that Mr. Robot is calling us a script kitty… okayyy. It seems there is more on the page, let’s scroll down and see what we can find!
+Nice! We got the password to… um… something. It seems that the password is base64 encoded. We can actually decode it in our terminal!
+
+![screenshot](images/9.jpg)
